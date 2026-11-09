@@ -1,0 +1,21 @@
+# Audio recordings & raw research (heavy binary files)
+docs/research/
+*.ogg
+*.mp3
+*.wav
+
+# Python cache & artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary MS Office files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# IDE and OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

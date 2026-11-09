@@ -194,3 +194,35 @@ JOIN work_orders wo ON c.id = wo.car_id
 WHERE wo.status IN ('Завершен', 'Оплачен')
 GROUP BY cl.id, cl.full_name, cl.phone
 ORDER BY total_spent DESC;
+
+
+-- --------------------------------------------------------------------
+-- СПЕЦИАЛЬНОЕ ПРОВЕРОЧНОЕ ЗАДАНИЕ ПРЕПОДАВАТЕЛЯ (Таймкод: 12:00 – 13:45)
+-- Запрос 5.1: Комплексная выборка данных БЕЗ операторов JOIN
+-- (Сквозное соединение 5 таблиц через реляционное произведение в WHERE)
+-- Назначение: Вывести клиента, его автомобили, оформленные заказ-наряды,
+--             выполненные сервисные работы и их стоимость строго БЕЗ JOIN
+-- --------------------------------------------------------------------
+SELECT 
+    cl.id AS client_id,
+    cl.full_name AS client_name,
+    cl.phone AS client_phone,
+    c.brand || ' ' || c.model AS car_model,
+    c.license_plate,
+    wo.order_number,
+    wo.created_at AS order_date,
+    s.name AS service_name,
+    os.unit_price * os.quantity AS service_cost
+FROM 
+    clients cl,
+    cars c,
+    work_orders wo,
+    order_services os,
+    services s
+WHERE 
+    cl.id = c.client_id
+    AND c.id = wo.car_id
+    AND wo.id = os.work_order_id
+    AND os.service_id = s.id
+ORDER BY 
+    cl.id, wo.created_at;
