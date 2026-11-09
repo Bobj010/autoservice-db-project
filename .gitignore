@@ -1,5 +1,7 @@
-# Audio recordings & raw research (heavy binary files)
-docs/research/
+# Local documentation & research
+docs/
+
+# Audio recordings & raw media
 *.ogg
 *.mp3
 *.wav
